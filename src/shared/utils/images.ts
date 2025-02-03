@@ -24,6 +24,7 @@ export type TImageWithSizes = {
   url: string
   width: number
   height: number
+  name: string
 }
 
 export const getImageUrlWithOriginalSizes = async (file: File): Promise<TImageWithSizes> => {
@@ -37,6 +38,7 @@ export const getImageUrlWithOriginalSizes = async (file: File): Promise<TImageWi
         url: url,
         width: img.width,
         height: img.height,
+        name: file.name,
       })
     }
     img.onerror = () => reject(new Error("image load rejected"))

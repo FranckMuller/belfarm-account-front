@@ -18,6 +18,8 @@ type Props<T extends FieldValues> = {
   initCrop: PixelCrop
 } & InputHTMLAttributes<HTMLInputElement>
 
+const DROPZONE_TITLE = "Перетяните фото сюда"
+
 export const ImageCropInput = <T extends FieldValues>({
   control,
   name,
@@ -38,7 +40,13 @@ export const ImageCropInput = <T extends FieldValues>({
       render={({ field: { onChange } }) => {
         return (
           <>
-            <UiDropzone className={className} isError={isError} multiple={false} onDrop={handleDropImage} />
+            <UiDropzone
+              title={DROPZONE_TITLE}
+              className={className}
+              isError={isError}
+              multiple={false}
+              onDrop={handleDropImage}
+            />
 
             {previewImage && (
               <div className="border border-gray-500 p-3 rounded-[3px]">

@@ -30,19 +30,20 @@ export const useMultipleImageCropInput = <T extends FieldValues>(
     const imagesUrlsWithSizes = await Promise.all(files.map((file) => getImageUrlWithOriginalSizes(file)))
 
     const croppedImages = await Promise.all(
-      imagesUrlsWithSizes.map((blob) => {
+      imagesUrlsWithSizes.map((image) => {
         return getCroppedImg(
-          blob.url,
+          image.url,
+          image.name,
           {
             unit: "px",
             x: 0,
             y: 0,
-            width: Math.min(blob.width, blob.height),
-            height: Math.min(blob.width, blob.height),
+            width: Math.min(image.width, image.height),
+            height: Math.min(image.width, image.height),
           },
           {
-            width: blob.width,
-            height: blob.height,
+            width: image.width,
+            height: image.height,
           }
         )
       })
@@ -79,7 +80,12 @@ export const useMultipleImageCropInput = <T extends FieldValues>(
         )
       })
 
-      const croppedImage = await getCroppedImg(newImages[currentCropImageIndex].url, crop, sizes)
+      const croppedImage = await getCroppedImg(
+        newImages[currentCropImageIndex].url,
+        newImages[currentCropImageIndex].name,
+        crop,
+        sizes
+      )
 
       setCroppedImages((prev) =>
         prev?.map((image, index) => {
@@ -100,6 +106,12 @@ export const useMultipleImageCropInput = <T extends FieldValues>(
     setCroppedImages(undefined)
   }
 
+  const handlePhotoDelete = (index: number) => {
+    setImages((prev) => prev?.filter((_, idx) => idx !== index))
+    setCroppedImages((prev) => prev?.filter((_, idx) => idx !== index))
+    setCurrentCropImageIndex(0)
+  }
+
   return {
     images,
     croppedImages,
@@ -110,5 +122,6 @@ export const useMultipleImageCropInput = <T extends FieldValues>(
     handleModalClose,
     handleCropComplete,
     handlePreviewImageClick,
+    handlePhotoDelete,
   }
 }

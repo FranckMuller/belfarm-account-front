@@ -14,7 +14,6 @@ interface UiFormField extends FC<Props> {
   Input: typeof Input
   Label: typeof Label
   Textarea: typeof Textarea
-
   Error: typeof Error
 }
 

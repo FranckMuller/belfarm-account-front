@@ -3,6 +3,7 @@ import type { PixelCrop } from "react-image-crop"
 export type TCroppedImage = {
   url: string
   image: Blob
+  name: string
 }
 
 export type TImageSizes = {
@@ -21,6 +22,7 @@ export const createImage = (url: string): Promise<HTMLImageElement> =>
 
 export const getCroppedImg = async (
   imageSrc: string,
+  imageName: string,
   pixelCrop: PixelCrop,
   displayedImageSizes: TImageSizes,
   flip = { horizontal: false, vertical: false }
@@ -84,8 +86,9 @@ export const getCroppedImg = async (
   // As a blob
   return new Promise((resolve, reject) => {
     croppedCanvas.toBlob((file) => {
+      console.log(imageSrc)
       if (file) {
-        resolve({ url: URL.createObjectURL(file), image: file })
+        resolve({ url: URL.createObjectURL(file), image: file, name: imageName })
       } else {
         reject(new Error("Canvas is empty"))
       }

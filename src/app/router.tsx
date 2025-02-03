@@ -1,18 +1,41 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter } from 'react-router-dom'
 
-import { ProductsPage } from "../pages/products-page"
+import { LoginForm, RegisterForm } from '@/features/auth'
+import { AuthLayout } from '@/shared/ui/layouts/auth/auth-layout'
 
-import { Layout } from "./layout"
+import { ProductsPage } from '../pages/products-page'
+
+import { Layout } from './layout'
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     errorElement: <div>Page not found</div>,
     children: [
       {
-        path: "/products",
+        path: 'products',
         element: <ProductsPage />,
+      },
+      // {
+      //   path: "/products/add",
+      //   element: <ProductsPage />,
+      // },
+    ],
+  },
+
+  {
+    path: '/auth',
+    element: <AuthLayout />,
+    errorElement: <div>Page not found</div>,
+    children: [
+      {
+        path: 'register',
+        element: <RegisterForm />,
+      },
+      {
+        path: 'login',
+        element: <LoginForm />,
       },
     ],
   },

@@ -42,7 +42,7 @@ const UiModal: UiModal = ({ className, isOpen = false, onClose, size = "md", chi
           {
             md: "max-w-[840px]",
             full: "mx-5",
-            content: "w-fit max-w-full",
+            content: "w-fit max-w-full md:max-w-[840px]",
           }[size]
         )}
       >

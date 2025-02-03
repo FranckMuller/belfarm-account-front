@@ -15,9 +15,9 @@ type Props = {
 
 export const ImageCropperComponent: FC<Props> = ({ className, aspect = 1 / 1, image, onCropComplete }) => {
   const [crop, setCrop] = useState<PixelCrop>()
-  const [isLoading, setIsLoading] = useState(false)
-  const [displayedImageSizes, setDisplayedImageSizes] = useState({ height: 0, width: 0 })
   const imageRef = useRef<HTMLImageElement>(null)
+
+  if (!image?.url) return null
 
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const size = Math.min(e.currentTarget.clientHeight, e.currentTarget.clientWidth)
@@ -28,27 +28,19 @@ export const ImageCropperComponent: FC<Props> = ({ className, aspect = 1 / 1, im
       height: image.crop?.height ?? size,
       width: image.crop?.width ?? size,
     })
-
-    if (imageRef.current) {
-      setDisplayedImageSizes({
-        height: imageRef.current.clientHeight,
-        width: imageRef.current.clientWidth,
-      })
-    }
-
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 500)
   }
-
-  if (!image.url) return null
 
   const handleCropChange = (crop: PixelCrop) => {
     setCrop(crop)
   }
 
   const handleCropComplete = (crop: PixelCrop) => {
-    onCropComplete(crop, displayedImageSizes)
+    if (imageRef.current) {
+      onCropComplete(crop, {
+        height: imageRef.current.clientHeight,
+        width: imageRef.current.clientWidth,
+      })
+    }
   }
 
   return (
@@ -60,7 +52,6 @@ export const ImageCropperComponent: FC<Props> = ({ className, aspect = 1 / 1, im
       onComplete={handleCropComplete}
     >
       <div className="max-h-full mx-auto relative">
-        {isLoading && <div className="absolute inset-0 bg-black/50">loading</div>}
         <img
           ref={imageRef}
           onLoad={handleImageLoad}

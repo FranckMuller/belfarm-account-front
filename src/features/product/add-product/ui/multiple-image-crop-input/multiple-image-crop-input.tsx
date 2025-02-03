@@ -1,10 +1,11 @@
 import type { Control, FieldValues, Path, UseFormSetError } from "react-hook-form"
-import { Controller } from "react-hook-form"
+import { Controller, useWatch } from "react-hook-form"
 import clsx from "clsx"
 
 import { UiButton } from "@/shared/ui/ui-button"
 import { UiDropzone } from "@/shared/ui/ui-dropzone"
 import { UiModal } from "@/shared/ui/ui-modal"
+import { getImageUrl } from "@/shared/utils/images"
 
 import { ImageCropper } from "../image-crop-input/image-cropper"
 
@@ -16,13 +17,17 @@ type Props<T extends FieldValues> = {
   control: Control<T>
   maxCount?: number
   isError?: boolean
+  files?: File[]
   onError: UseFormSetError<T>
 }
+
+const DROPZONE_TITLE = "Перетяните ваши фото сюда"
 
 export const MultipleImageCropInput = <T extends FieldValues>({
   name,
   control,
   maxCount,
+  files,
   isError,
   onError,
 }: Props<T>) => {
@@ -36,17 +41,30 @@ export const MultipleImageCropInput = <T extends FieldValues>({
     handleModalClose,
     handleCropComplete,
     handlePreviewImageClick,
+    handlePhotoDelete,
   } = useMultipleImageCropInput<T>(name, onError, maxCount)
 
-  const handleSaveButtonClick = (onChange: (files: File[]) => void) => {
-    console.log(croppedImages)
-    if (croppedImages && croppedImages[0]?.image) {
-      const file = new File([croppedImages[0]?.image], "photo")
-      console.log(file)
+  useWatch({ control, name })
 
-      onChange([file])
+  const handleSaveButtonClick = (onChange: (files: File[]) => void) => {
+    if (croppedImages && croppedImages.length > 0) {
+      const files = croppedImages.map((image) => {
+        if (image !== null) {
+          return new File([image.image], image.name)
+        }
+      })
+
+      const filesToSubmit = files.filter((file) => file !== undefined)
+
+      if (filesToSubmit.length) {
+        onChange(filesToSubmit)
+      }
+
+      handleModalClose()
     }
   }
+
+  const viewedImages = files ? files.map((file) => getImageUrl(file)) : null
 
   return (
     <Controller
@@ -55,8 +73,17 @@ export const MultipleImageCropInput = <T extends FieldValues>({
       render={({ field: { onChange } }) => {
         return (
           <>
-            <UiDropzone isError={isError} onDrop={handleDrop} />
-            {isLoading && <div>loading....</div>}
+            <UiDropzone
+              title={DROPZONE_TITLE}
+              files={files}
+              isError={isError}
+              isLoading={isLoading}
+              onDrop={handleDrop}
+              className="flex-1"
+            >
+              {viewedImages && <UiDropzone.ImagesPreview imagesUrls={viewedImages} />}
+            </UiDropzone>
+
             <UiModal
               size="content"
               className="md:max-h-[calc(100vh-5rem)] relative"
@@ -75,6 +102,7 @@ export const MultipleImageCropInput = <T extends FieldValues>({
                   activeImageIndex={currentCropImageIndex}
                   images={croppedImages}
                   onImageClick={handlePreviewImageClick}
+                  onDelete={handlePhotoDelete}
                 />
               )}
 

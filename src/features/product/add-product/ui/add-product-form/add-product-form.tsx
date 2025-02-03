@@ -1,28 +1,29 @@
-import { useMemo } from "react"
-import type { PixelCrop } from "react-image-crop"
+import { useMemo } from "react";
+import type { PixelCrop } from "react-image-crop";
 
-import { UiButton } from "@/shared/ui/ui-button"
-import { UiFormField } from "@/shared/ui/ui-form-field"
-import { UiSelect } from "@/shared/ui/ui-form-field/ui-select"
+import { UiButton } from "@/shared/ui/ui-button";
+import { UiFormField } from "@/shared/ui/ui-form-field";
+import { UiSelect } from "@/shared/ui/ui-form-field/ui-select";
+import { getImageUrl } from "@/shared/utils/images";
 
-import { type AddProductFormFields, useAddProductForm } from "../../hooks/use-add-product-form"
-import { ImageCropInput } from "../image-crop-input"
-import { MultipleImageCropInput } from "../multiple-image-crop-input"
+import { type AddProductFormFields, useAddProductForm } from "../../hooks/use-add-product-form";
+import { ImageCropInput } from "../image-crop-input";
+import { MultipleImageCropInput } from "../multiple-image-crop-input";
 
-import { AddProductFormLayout } from "./add-product-form-layout"
-import { categories, statuses, subCategories, units } from "./constants"
+import { AddProductFormLayout } from "./add-product-form-layout";
+import { categories, statuses, subCategories, units } from "./constants";
 
 export const AddProductForm = () => {
-  const { register, handleSubmit, control, setError, errors } = useAddProductForm()
+  const { register, handleSubmit, control, setError, getValues, errors } = useAddProductForm();
 
   const onSubmit = (data: unknown) => {
-    console.log(data)
-  }
+    console.log(data);
+  };
 
-  const imageCrop: PixelCrop = useMemo(() => ({ unit: "px", x: 0, y: 0, width: 350, height: 350 }), [])
+  const imageCrop: PixelCrop = useMemo(() => ({ unit: "px", x: 0, y: 0, width: 350, height: 350 }), []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex-col gap-5 flex px-2">
       <AddProductFormLayout
         infoProductFields={
           <>
@@ -176,6 +177,7 @@ export const AddProductForm = () => {
                 maxCount={4}
                 onError={setError}
                 isError={!!errors?.photos}
+                files={getValues("photos")}
               />
               <UiFormField.Error>{errors?.photos?.message}</UiFormField.Error>
             </UiFormField>
@@ -198,5 +200,5 @@ export const AddProductForm = () => {
         button={<UiButton variant="primary">Сохранить</UiButton>}
       />
     </form>
-  )
-}
+  );
+};
