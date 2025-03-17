@@ -1,18 +1,19 @@
-import type { FC, PropsWithChildren } from "react"
-import { NavLink } from "react-router-dom"
-import clsx from "clsx"
+import type { FC, PropsWithChildren, ReactElement } from 'react'
+import { NavLink } from 'react-router-dom'
+import clsx from 'clsx'
 
-type Props = { href: string } & PropsWithChildren
+import styles from './sidebar-link.module.scss'
 
-export const SidebarLink: FC<Props> = ({ href, children }) => {
-  const classNames = ({ isActive }: { isPending: boolean; isActive: boolean }) =>
-    clsx(
-      isActive && "border-blue-600 bg-blue-600 hover:bg-blue-600 text-white",
-      "flex gap-3 items-center py-3 px-3 xl:py-3 xl:px-6 border-l-[3px] border-transparent hover:border-blue-600 hover:bg-gray-100"
-    )
+type Props = { href: string; icon: ReactElement } & PropsWithChildren
+
+export const SidebarLink: FC<Props> = ({ href, icon, children }) => {
+  const classNames = ({ isActive }: { isPending: boolean; isActive: boolean }) => {
+    return clsx(styles['sidebar-link'], isActive && styles['active'])
+  }
 
   return (
     <NavLink className={classNames} to={href}>
+      <span className={styles['icon']}>{icon}</span>
       {children}
     </NavLink>
   )

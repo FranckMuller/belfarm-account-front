@@ -1,13 +1,13 @@
-import type { InputHTMLAttributes } from "react"
-import { type Control, Controller, FieldValues, Path } from "react-hook-form"
-import type { PixelCrop } from "react-image-crop"
+import type { InputHTMLAttributes } from 'react'
+import { type Control, Controller, FieldValues, Path } from 'react-hook-form'
+import type { PixelCrop } from 'react-image-crop'
 
-import { UiDropzone } from "@/shared/ui/ui-dropzone"
+import { UiDropzone } from '@/shared/ui/ui-dropzone'
 
-import { ImageCropModal } from "./image-crop-modal"
-import { useImageCropInput } from "./use-image-crop-input"
+import { ImageCropModal } from './image-crop-modal'
+import { useImageCropInput } from './use-image-crop-input'
 
-import "react-image-crop/src/ReactCrop.scss"
+import 'react-image-crop/src/ReactCrop.scss'
 
 type Props<T extends FieldValues> = {
   className?: string
@@ -18,7 +18,7 @@ type Props<T extends FieldValues> = {
   initCrop: PixelCrop
 } & InputHTMLAttributes<HTMLInputElement>
 
-const DROPZONE_TITLE = "Перетяните фото сюда"
+const DROPZONE_TITLE = 'Перетяните фото сюда'
 
 export const ImageCropInput = <T extends FieldValues>({
   control,

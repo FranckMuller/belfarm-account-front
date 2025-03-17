@@ -68,12 +68,9 @@ export const useAddProductForm = () => {
     formState: { errors, ...state },
     setError,
     getValues,
-    ...rest
   } = useForm<AddProductFormFields>({
     resolver: zodResolver(validationSchema),
   })
-  // console.log(state)
-  // console.log(getValues())
 
   useWatch({ control, name: 'photos' })
 

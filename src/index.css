@@ -85,3 +85,10 @@
   font-weight: 600;
   font-style: italic;
 }
+
+:root {
+  --color-azureish-white: #dbe3ea;
+  --color-light-gray: #ccd2da;
+  --color-quick-silver: #a1a1a1;
+  --color-royal-orange: #ff914d;
+}

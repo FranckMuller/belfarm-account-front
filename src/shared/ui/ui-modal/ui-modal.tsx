@@ -1,16 +1,16 @@
-import type { FC, PropsWithChildren } from "react"
-import { createPortal } from "react-dom"
-import { IoCloseOutline } from "react-icons/io5"
-import clsx from "clsx"
+import type { FC, PropsWithChildren } from 'react'
+import { createPortal } from 'react-dom'
+import { IoCloseOutline } from 'react-icons/io5'
+import clsx from 'clsx'
 
-import { Body } from "./body"
-import { Footer } from "./footer"
-import { Header } from "./header"
+import { Body } from './body'
+import { Footer } from './footer'
+import { Header } from './header'
 
 type Props = {
   className?: string
-  isOpen: boolean
-  size?: "md" | "full" | "content"
+  visible: boolean
+  size?: 'md' | 'full' | 'content'
   onClose: () => void
 } & PropsWithChildren
 
@@ -20,11 +20,11 @@ interface UiModal extends FC<Props> {
   Footer: typeof Footer
 }
 
-const UiModal: UiModal = ({ className, isOpen = false, onClose, size = "md", children }) => {
-  if (!isOpen) return null
+const UiModal: UiModal = ({ className, visible = false, onClose, size = 'md', children }) => {
+  if (!visible) return null
 
   const handleClose = (e: React.MouseEvent) => {
-    const inModal = (e.target as HTMLElement).closest("[data-id=modal]")
+    const inModal = (e.target as HTMLElement).closest('[data-id=modal]')
     if (inModal) return
     onClose()
   }
@@ -38,11 +38,11 @@ const UiModal: UiModal = ({ className, isOpen = false, onClose, size = "md", chi
         data-id="modal"
         className={clsx(
           className,
-          "bg-white p-4 min-h-[320px] mx-auto relative flex justify-center flex-col h-[100vh] md:rounded-lg",
+          'bg-white p-4 min-h-[320px] mx-auto relative flex justify-center flex-col h-[100vh] md:rounded-lg',
           {
-            md: "max-w-[840px]",
-            full: "mx-5",
-            content: "w-fit max-w-full md:max-w-[840px]",
+            md: 'max-w-[840px]',
+            full: 'mx-5',
+            content: 'w-fit max-w-full md:max-w-[840px]',
           }[size]
         )}
       >
@@ -60,7 +60,7 @@ const UiModal: UiModal = ({ className, isOpen = false, onClose, size = "md", chi
     </div>
   )
 
-  return createPortal(modal, document && (document.getElementById("modal") as HTMLDivElement))
+  return createPortal(modal, document && (document.getElementById('modal') as HTMLDivElement))
 }
 
 UiModal.Header = Header

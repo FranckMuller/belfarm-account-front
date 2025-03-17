@@ -1,10 +1,10 @@
-import type { FC } from "react"
-import type { Crop, PixelCrop } from "react-image-crop"
+import type { FC } from 'react'
+import type { Crop, PixelCrop } from 'react-image-crop'
 
-import { UiButton } from "@/shared/ui/ui-button"
-import { UiModal } from "@/shared/ui/ui-modal"
+import { UiButton } from '@/shared/ui/ui-button'
+import { UiModal } from '@/shared/ui/ui-modal'
 
-import { ImageCropper } from "./image-cropper"
+import { ImageCropper } from './image-cropper'
 
 type Props = {
   title: string

@@ -1,10 +1,11 @@
-import type { FC, PropsWithChildren } from "react"
-import clsx from "clsx"
+import type { FC, PropsWithChildren } from 'react'
+import clsx from 'clsx'
 
-import { Error } from "./error"
-import { Input } from "./input"
-import { Label } from "./label"
-import { Textarea } from "./textarea"
+import { CropImageInput } from './crop-image-input'
+import { Error } from './error'
+import { Input } from './input'
+import { Label } from './label'
+import { Textarea } from './textarea'
 
 type Props = {
   className?: string
@@ -15,16 +16,17 @@ interface UiFormField extends FC<Props> {
   Label: typeof Label
   Textarea: typeof Textarea
   Error: typeof Error
+  CropImageInput: typeof CropImageInput
 }
 
 const UiFormField: UiFormField = ({ className, children }) => {
-  return <div className={clsx(className, "relative w-full")}>{children}</div>
+  return <div className={clsx(className, 'relative w-full')}>{children}</div>
 }
 
 UiFormField.Input = Input
 UiFormField.Label = Label
 UiFormField.Textarea = Textarea
-
 UiFormField.Error = Error
+UiFormField.CropImageInput = CropImageInput
 
 export { UiFormField }

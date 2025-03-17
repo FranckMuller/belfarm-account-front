@@ -1,13 +1,15 @@
-import type { FC, PropsWithChildren } from "react"
-import { Children, cloneElement, isValidElement, ReactElement } from "react"
-import Dropzone from "react-dropzone"
-import { IoCloudUploadOutline } from "react-icons/io5"
-import clsx from "clsx"
+import type { FC, PropsWithChildren } from 'react'
+import { Children, cloneElement, isValidElement, ReactElement } from 'react'
+import Dropzone from 'react-dropzone'
+import { IoCloudUploadOutline } from 'react-icons/io5'
+import clsx from 'clsx'
 
-import { UiButton } from "../ui-button"
-import { UiSpinner } from "../ui-spinner"
+import { UiButton } from '../ui-button'
+import { UiSpinner } from '../ui-spinner'
 
-import { ImagesPreview } from "./images-preview"
+import { ImagesPreview } from './images-preview'
+
+import styles from './ui-dropzone.module.scss'
 
 type Props = {
   className?: string
@@ -26,18 +28,12 @@ interface UiDropzone extends FC<Props> {
 const UiDropzone: UiDropzone = ({ className, title, isError, multiple, isLoading, files, onDrop, children }) => {
   return (
     <div className="relative">
-      <Dropzone multiple={multiple} onDrop={onDrop}>
+      <Dropzone multiple={!!multiple} onDrop={onDrop}>
         {({ getRootProps, getInputProps }) => {
           return (
-            <div
-              className={clsx(
-                className,
-                "border border-dashed border-gray-400 rounded-[3px] p-5 text-gray-500",
-                isError && "border-orange-500"
-              )}
-            >
+            <div className={clsx(className, styles['dropzone'], isError && styles['error'])}>
               {!files && (
-                <div className={clsx("flex flex-col w-full items-center  text-gray-500")} {...getRootProps()}>
+                <div className={clsx(styles['dropzone-body'])} {...getRootProps()}>
                   <input {...getInputProps()} />
                   <IoCloudUploadOutline className="w-10 h-10 mb-3" />
                   <p>{title}</p>

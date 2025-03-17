@@ -1,0 +1,21 @@
+.main-layout {
+  padding: 0 0 0 270px;
+  transition: padding-left 0.1s ease;
+}
+
+.app-container {
+  background: #f5f6fa;
+}
+
+.app-body {
+  padding: 1.25rem 1.25rem;
+  height: calc(100vh - 110px);
+  overflow: auto;
+}
+
+.footer {
+  font-size: 0.75rem;
+  padding: 0.6rem 1.5rem;
+  border-top: 1px solid #dbe3ea;
+  background: #fff;
+}

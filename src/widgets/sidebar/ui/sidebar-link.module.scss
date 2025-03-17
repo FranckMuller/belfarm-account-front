@@ -1,0 +1,43 @@
+.sidebar-link {
+  padding: 7px 10px 7px 10px;
+  display: flex;
+  align-items: center;
+  color: #31363b;
+  white-space: nowrap;
+  font-size: 0.95rem;
+  border-radius: 10px;
+
+  &:hover {
+    background: #f5f6fa;
+
+    .icon {
+      background: #e7e9f1;
+    }
+  }
+
+  &.active {
+    background: #3659cd;
+    color: #fff;
+
+    .icon {
+      background-color: #fff;
+      color: #3659cd;
+    }
+  }
+}
+
+.icon {
+  margin-right: 15px;
+  border-radius: 10px;
+  background: #f5f6fa;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}

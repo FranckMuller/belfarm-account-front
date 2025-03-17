@@ -1,0 +1,17 @@
+.dropzone {
+  border-radius: 3px;
+  padding: 1rem 1rem;
+  border: 1px solid var(--color-light-gray);
+
+  &.error {
+    border-color: var(--color-royal-orange);
+  }
+}
+
+.dropzone-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-quick-silver);
+  width: 100%;
+}

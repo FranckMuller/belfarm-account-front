@@ -1,0 +1,16 @@
+.input {
+  border: 1px solid var(--color-light-gray);
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.2rem;
+  outline: none;
+  width: 100%;
+  min-height: 34px;
+
+  &.error {
+    border-color: var(--color-royal-orange);
+
+    &:focus {
+      border-color: var(--color-royal-orange);
+    }
+  }
+}

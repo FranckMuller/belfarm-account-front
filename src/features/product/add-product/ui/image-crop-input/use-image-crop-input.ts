@@ -1,9 +1,9 @@
-import { useCallback, useMemo, useState } from "react"
-import type { PixelCrop } from "react-image-crop"
+import { useCallback, useMemo, useState } from 'react'
+import type { PixelCrop } from 'react-image-crop'
 
-import { getCroppedImg, type TCroppedImage } from "@/shared/utils/canvas"
-import { mapBlobToFile } from "@/shared/utils/files"
-import { getImageUrl } from "@/shared/utils/images"
+import { getCroppedImg, type TCroppedImage } from '@/shared/utils/canvas'
+import { mapBlobToFile } from '@/shared/utils/files'
+import { getImageUrl } from '@/shared/utils/images'
 
 export const useImageCropInput = () => {
   const [files, setFiles] = useState<File[]>()
@@ -31,7 +31,7 @@ export const useImageCropInput = () => {
           }
         }
       } catch (error) {
-        console.error("Ошибка обрезки изображения:", error)
+        console.error('Ошибка обрезки изображения:', error)
       }
     },
     [files]
@@ -39,7 +39,7 @@ export const useImageCropInput = () => {
 
   const handleSaveButtonClick = (cb: (img: File) => void) => {
     if (files && croppedImage?.image) {
-      const img = mapBlobToFile(croppedImage.image, files[0].name, "image/jpg")
+      const img = mapBlobToFile(croppedImage.image, files[0].name, 'image/jpg')
       setFiles(undefined)
       setCroppedImage(undefined)
       setPreviewImage(croppedImage.url)

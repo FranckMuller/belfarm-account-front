@@ -29,7 +29,7 @@ export default {
     ['orange-700']: '#cc733f',
     ['orange-800']: '#b36439',
     ['orange-900']: '#994532',
-    ['gray-100']: '#f5f6fa',
+    ['gray-100']: '#f7f7f7',
     ['gray-200']: '#e8e8e8',
     ['gray-300']: '#e4e9f0',
     ['gray-400']: '#d7d7dc',

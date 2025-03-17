@@ -1,0 +1,30 @@
+.sidebar {
+  background-color: #fff;
+  width: 270px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  box-shadow: 20px 0 20px -20px #d3d7e9;
+  transition:
+    left 0.3s ease,
+    width 0.3s ease;
+}
+
+.brand {
+  min-height: 70px;
+  overflow: hidden;
+  border-bottom: 1px solid #e8ebf4;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu {
+  margin: 2rem 1rem;
+}

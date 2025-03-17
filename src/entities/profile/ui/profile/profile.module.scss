@@ -1,0 +1,42 @@
+.profile-card {
+  border: 1px solid #dbe3ea;
+  border-radius: 0.2rem;
+  background: #fff;
+  max-width: 355px;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0;
+  padding: 0.925rem 1rem;
+  border-bottom: 1px solid #dbe3ea;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile-avatar {
+  margin-bottom: 0.5rem;
+}
+
+.profile-name {
+  font-size: 1.09375rem;
+}
+
+.profile-status {
+  opacity: 0.5;
+  font-size: 0.875em;
+}
+
+.card-title {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 1.09375rem;
+}

@@ -1,16 +1,16 @@
-import type { Control, FieldValues, Path, UseFormSetError } from "react-hook-form"
-import { Controller, useWatch } from "react-hook-form"
-import clsx from "clsx"
+import type { Control, FieldValues, Path, UseFormSetError } from 'react-hook-form'
+import { Controller, useWatch } from 'react-hook-form'
+import clsx from 'clsx'
 
-import { UiButton } from "@/shared/ui/ui-button"
-import { UiDropzone } from "@/shared/ui/ui-dropzone"
-import { UiModal } from "@/shared/ui/ui-modal"
-import { getImageUrl } from "@/shared/utils/images"
+import { UiButton } from '@/shared/ui/ui-button'
+import { UiDropzone } from '@/shared/ui/ui-dropzone'
+import { UiModal } from '@/shared/ui/ui-modal'
+import { getImageUrl } from '@/shared/utils/images'
 
-import { ImageCropper } from "../image-crop-input/image-cropper"
+import { ImageCropper } from '../image-crop-input/image-cropper'
 
-import { CroppedImagesPreview } from "./components/cropped-images-preiew"
-import { useMultipleImageCropInput } from "./hooks/use-multiple-image-crop-input"
+import { CroppedImagesPreview } from './components/cropped-images-preiew'
+import { useMultipleImageCropInput } from './hooks/use-multiple-image-crop-input'
 
 type Props<T extends FieldValues> = {
   name: Path<T>
@@ -21,7 +21,7 @@ type Props<T extends FieldValues> = {
   onError: UseFormSetError<T>
 }
 
-const DROPZONE_TITLE = "Перетяните ваши фото сюда"
+const DROPZONE_TITLE = 'Перетяните ваши фото сюда'
 
 export const MultipleImageCropInput = <T extends FieldValues>({
   name,
@@ -87,11 +87,11 @@ export const MultipleImageCropInput = <T extends FieldValues>({
             <UiModal
               size="content"
               className="md:max-h-[calc(100vh-5rem)] relative"
-              isOpen={!!(croppedImages && images)}
+              visible={!!(croppedImages && images)}
               onClose={handleModalClose}
             >
               {images?.length && (
-                <div className={clsx("mx-auto max-h-[calc(100vh-9.25rem-196px)]")}>
+                <div className={clsx('mx-auto max-h-[calc(100vh-9.25rem-196px)]')}>
                   <ImageCropper image={images[currentCropImageIndex]} onCropComplete={handleCropComplete} />
                 </div>
               )}

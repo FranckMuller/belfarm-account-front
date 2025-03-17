@@ -1,11 +1,13 @@
-import type { FC } from "react"
-import { BiAnalyse } from "react-icons/bi"
-import { IoCartOutline } from "react-icons/io5"
-import { LiaCartPlusSolid } from "react-icons/lia"
-import { LuUser2 } from "react-icons/lu"
-import clsx from "clsx"
+import type { FC } from 'react'
+import { BiAnalyse } from 'react-icons/bi'
+import { IoCartOutline } from 'react-icons/io5'
+import { LiaCartPlusSolid } from 'react-icons/lia'
+import { LuUser2 } from 'react-icons/lu'
+import clsx from 'clsx'
 
-import { SidebarLink } from "./ui/sidebar-link"
+import { SidebarLink } from './ui/sidebar-link'
+
+import styles from './sidebar.module.scss'
 
 type Props = {
   className?: string
@@ -13,24 +15,32 @@ type Props = {
 
 export const Sidebar: FC<Props> = ({ className }) => {
   return (
-    <div className={clsx(className, "h-full bg-white pt-4 shadow-lg")}>
-      <div className="mt-8 text-gray-900">
-        <SidebarLink href="dashboard">
-          <BiAnalyse className="h-6 w-6" /> Дашборд
-        </SidebarLink>
+    <nav className={styles['sidebar']}>
+      <div className={styles['brand']}>Belfarm.by</div>
 
-        <SidebarLink href="/">
-          <LuUser2 className="h-6 w-6" /> Мой профиль
-        </SidebarLink>
+      <ul className={styles['menu']}>
+        <li>
+          <SidebarLink icon={<BiAnalyse />} href="dashboard">
+            Дашборд
+          </SidebarLink>
+        </li>
 
-        <SidebarLink href="products">
-          <IoCartOutline className="h-6 w-6" /> Моя продукция
-        </SidebarLink>
-
-        <SidebarLink href="orders">
-          <LiaCartPlusSolid className="h-6 w-6" /> Заказы
-        </SidebarLink>
-      </div>
-    </div>
+        <li>
+          <SidebarLink icon={<LuUser2 />} href="/profile">
+            Мой профиль
+          </SidebarLink>
+        </li>
+        <li>
+          <SidebarLink icon={<IoCartOutline />} href="products">
+            Моя продукция
+          </SidebarLink>
+        </li>
+        <li>
+          <SidebarLink icon={<LiaCartPlusSolid />} href="orders">
+            Заказы
+          </SidebarLink>
+        </li>
+      </ul>
+    </nav>
   )
 }
